@@ -1846,6 +1846,425 @@
                 font-size: 1.2rem;
             }
         }
+        /* ===============================
+   MOBILE FIRST RESPONSIVE UPDATES
+=================================*/
+/* Fix for mobile menu scroll */
+@media (max-width: 992px) {
+    html.menu-open,
+    body.menu-open {
+        overflow: hidden;
+        height: 100%;
+    }
+    
+    /* Smooth scroll for mobile */
+    html {
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Ensure proper stacking */
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+    }
+    
+    /* Adjust hero section for mobile menu */
+    .hero {
+        padding-top: 100px;
+    }
+}
+
+/* Prevent touch callout on mobile */
+.nav-links {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Better tap targets for mobile */
+@media (max-width: 768px) {
+    .nav-links a,
+    .hamburger {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .nav-links a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+/* Fix for viewport scaling */
+@viewport {
+    width: device-width;
+    zoom: 1.0;
+}
+
+/* Prevent horizontal scrolling */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Better mobile navigation */
+@media (max-width: 992px) {
+    .nav-links {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: var(--dark-navy);
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 25px;
+        padding: 40px 0;
+        display: none;
+        z-index: 999;
+        overflow-y: auto;
+    }
+    
+    .nav-links.active {
+        display: flex;
+        animation: slideDown 0.3s ease;
+    }
+    
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .hamburger {
+        display: block;
+        z-index: 1000;
+    }
+    
+    /* Close icon when menu is open */
+    .nav-links.active ~ .hamburger i {
+        transform: rotate(90deg);
+    }
+}
+
+/* Improved hero section for mobile */
+@media (max-width: 768px) {
+    .hero {
+        min-height: 80vh;
+        padding-top: 100px;
+    }
+    
+    .hero h1 {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        line-height: 1.2;
+    }
+    
+    .typing-text {
+        font-size: clamp(1.2rem, 3vw, 1.8rem);
+        white-space: normal;
+        overflow: visible;
+        border-right: none;
+        animation: none;
+    }
+    
+    /* Fix typing animation for mobile */
+    @media (prefers-reduced-motion: no-preference) {
+        .typing-text {
+            animation: typing 3.5s steps(30, end) forwards, blink 0.8s infinite;
+        }
+    }
+}
+
+/* Better card layouts */
+@media (max-width: 768px) {
+    .projects-grid,
+    .achievements-grid,
+    .skills-grid {
+        grid-template-columns: 1fr !important;
+        gap: 30px;
+    }
+    
+    .about-highlights {
+        grid-template-columns: 1fr;
+    }
+    
+    .metrics-mini-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Form improvements for mobile */
+@media (max-width: 768px) {
+    .contact-form {
+        padding: 25px;
+    }
+    
+    .form-control {
+        font-size: 16px; /* Prevents iOS zoom */
+        padding: 16px;
+    }
+    
+    .form-group select.form-control {
+        font-size: 16px;
+        padding: 16px;
+    }
+    
+    /* Fix for iOS form elements */
+    input, textarea, select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border-radius: 12px;
+    }
+}
+
+/* Better touch targets */
+@media (max-width: 768px) {
+    .btn, 
+    .nav-links a,
+    .skill-item,
+    .social-icon {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .nav-links a {
+        padding: 15px 0;
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Fix 3D effects on mobile */
+@media (max-width: 768px) {
+    .project-card-inner,
+    .profile-img {
+        transform-style: flat;
+    }
+    
+    .project-card:hover .project-card-inner {
+        transform: none;
+    }
+    
+    .project-card-front,
+    .project-card-back {
+        backface-visibility: visible;
+        position: relative;
+        transform: none;
+        height: auto;
+        min-height: 300px;
+    }
+    
+    .project-card-back {
+        display: none;
+    }
+    
+    .project-card:hover .project-card-back {
+        display: flex;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+/* Performance improvements for mobile */
+@media (max-width: 768px) {
+    /* Reduce animations on mobile */
+    .highlight-card::before,
+    .skill-category::before,
+    .contact-item::before {
+        display: none;
+    }
+    
+    /* Reduce blur effects for performance */
+    header, 
+    .highlight-card,
+    .skill-category,
+    .contact-form {
+        backdrop-filter: blur(5px);
+    }
+    
+    /* Disable 3D canvas on low-end devices */
+    @media (max-width: 1024px) and (orientation: portrait) {
+        #threeCanvas {
+            display: none;
+        }
+    }
+}
+
+/* Fix for very small screens */
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+    
+    .section-title {
+        font-size: 1.6rem;
+        margin-bottom: 40px;
+    }
+    
+    .highlight-card,
+    .skill-category,
+    .achievement-card {
+        padding: 20px;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .floating-contact,
+    .back-to-top {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+    
+    .floating-contact {
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .back-to-top {
+        bottom: 90px;
+        right: 20px;
+    }
+}
+
+/* Landscape orientation fixes */
+@media (max-height: 600px) and (orientation: landscape) {
+    .hero {
+        min-height: 120vh;
+    }
+    
+    .nav-links {
+        max-height: 70vh;
+        overflow-y: auto;
+    }
+    
+    .profile-img-container {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+/* High DPI screens */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .section-title,
+    .hero h1 {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+/* Print styles */
+@media print {
+    .floating-contact,
+    .back-to-top,
+    #threeCanvas,
+    .cursor,
+    .cursor-follower {
+        display: none !important;
+    }
+    
+    body {
+        background: white !important;
+        color: black !important;
+    }
+    
+    .btn {
+        border: 1px solid #000 !important;
+        color: #000 !important;
+        background: none !important;
+    }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .typing-text {
+        animation: none !important;
+        border-right: none !important;
+    }
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --navy: #0a0e17;
+        --white: #f5f7ff;
+        --gray: #a0a7c2;
+    }
+}
+
+/* Fix for Safari/iOS specific issues */
+@supports (-webkit-touch-callout: none) {
+    .hero {
+        min-height: -webkit-fill-available;
+    }
+    
+    .profile-img {
+        -webkit-mask-image: -webkit-radial-gradient(white, black);
+    }
+}
+
+/* Ensure content fits within viewport */
+.container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Prevent images from overflowing */
+img, video, canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Smooth scrolling fix */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+/* Loading screen mobile fix */
+@media (max-width: 768px) {
+    .loading-logo {
+        font-size: 3rem;
+    }
+    
+    .loading-bar {
+        width: 200px;
+    }
+}
     </style>
 </head>
 
@@ -3054,28 +3473,62 @@
             });
         });
     </script>
-    <script>
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>    
 
-        hamburger.addEventListener('click', () => {
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+
+// Simple mobile menu toggle
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (hamburger) {
+        hamburger.addEventListener('click', function() {
+            // Toggle menu
             navLinks.classList.toggle('active');
+            
+            // Toggle icon
+            const icon = this.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+                document.body.style.overflow = 'hidden';
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                document.body.style.overflow = '';
+            }
         });
-
-    </script>
-    <script>
-        const mobileNavToggle = document.getElementById('mobileNavToggle');
-        const mobileNav = document.getElementById('mobileNav');
-        const navOverlay = document.getElementById('navOverlay');
-        mobileNavToggle.addEventListener('click', () => {
-            mobileNav.classList.toggle('active');
-            navOverlay.classList.toggle('active');
+        
+        // Close menu when clicking links
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                navLinks.classList.remove('active');
+                const icon = hamburger.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                document.body.style.overflow = '';
+            });
         });
-        navOverlay.addEventListener('click', () => {
-            mobileNav.classList.remove('active');
-            navOverlay.classList.remove('active');
+        
+        // Close menu on window resize (desktop)
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 992) {
+                navLinks.classList.remove('active');
+                const icon = hamburger.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                document.body.style.overflow = '';
+            }
         });
-    </script>
+    }
+});
+</script>
 
 </body>
 
